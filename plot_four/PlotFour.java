@@ -1,9 +1,7 @@
 package plot_four;
-import java.util.Scanner;
 
-public class PlotFour {																		//Class used to create Plot Four plot_four_app
-	
-	private class Piece {																	//Class used to create pieces
+public class PlotFour {
+	private class Piece {																	
 		
 		public int user = 0;
 		public Position position = null;
@@ -14,7 +12,7 @@ public class PlotFour {																		//Class used to create Plot Four plot_f
 		}
 	}
 	
-	private class Position {																//Class used to create positions
+	private class Position {																
 		
 		public int user = 0;
 		public int row = 0;
@@ -32,9 +30,7 @@ public class PlotFour {																		//Class used to create Plot Four plot_f
 	private final int ROWS = 6;
 	private final int COLS = 7;
 	private final int UNITS = 42;
-	//Array that stores the pieces
 	private Piece[] pieces = new Piece[UNITS];
-	//Array that stores the positions
 	private Position[][] positions = new Position[ROWS][COLS];
 	
 	private int turn = 0;
@@ -45,7 +41,7 @@ public class PlotFour {																		//Class used to create Plot Four plot_f
 		startGame();
 	}
 	
-	private void setPieces() {																//Sets all pieces to be used during a plot_four_app
+	private void setPieces() {
 		for (int piece = 0; piece < UNITS; piece++)
 			if (piece % 2 == 0)
 				pieces[piece] = new Piece(1, null);
@@ -53,13 +49,13 @@ public class PlotFour {																		//Class used to create Plot Four plot_f
 				pieces[piece] = new Piece(2, null);
 	}
 	
-	private void setPositions() {																//Sets all positions to be used during a plot_four_app
+	private void setPositions() {
 		for (int row = 0; row < ROWS; row++)
 			for (int col = 0; col < COLS; col++)
 				positions[row][col] = new Position(0, row, col, null);
 	}
 	
-	private void move(int col) {																//Selects column for a move
+	private void move(int col) {
 		
 		if (col >= 0 && col < COLS && positions[0][col].user == 0) {
 			
@@ -79,13 +75,13 @@ public class PlotFour {																		//Class used to create Plot Four plot_f
 		}
 	}
 	
-	private int win(Position position, int v, int u, int n) {												//Checks if there is a win
+	private int win(Position position, int v, int u, int n) {
 		if(position == null)
 			return 0;
 		
 		int row = position.row, col = position.col, count = 0;
 
-		//Checks half a vertical, diagonal, or horizontal line based on the arguments assigned to r and c
+																												
 		while ((row >= 0 && col >= 0) && (row < positions.length && col < positions[row].length)) {
 
 			if (positions[row][col].user == position.user)
@@ -97,13 +93,13 @@ public class PlotFour {																		//Class used to create Plot Four plot_f
 			col += u;
 		}
 		
-		//Re-assigns the values of y and x to r and c to check the other half of the line
+																												
 		row = position.row; 
 		col = position.col; 
 
 		while ((row >= 0 && col >= 0) && (row < ROWS && col < COLS)) {
 
-			if (positions[row][col].user == position.user && (row != position.row || col != position.col))
+			if (positions[row][col].user == position.user && (row != position.row || col != position.col))		
 				count++;
 			else if (row != position.row || col != position.col)
 				break;
@@ -113,8 +109,6 @@ public class PlotFour {																		//Class used to create Plot Four plot_f
 
 		}
 
-		//Recursively checks the area centering a unit before returning the value of the unit
-		//that won or 0.
 		if (count == 4)
 			return position.user;
 		else if (n < 4) {
@@ -129,11 +123,9 @@ public class PlotFour {																		//Class used to create Plot Four plot_f
 			return 0;
 	}
 	
-	private void startGame() {																//Start a Plot Four plot_four_app
+	private void startGame() {
 		
-		//Instantiates all pieces for plot_four_app
 		setPieces();
-		//Instantiates all positions for plot_four_app
 		setPositions();
 		
 		while(currentUnit < 42 && winner == 0) {
@@ -141,7 +133,6 @@ public class PlotFour {																		//Class used to create Plot Four plot_f
 		}
 	}
 	
-	private void endGame() {																//End a Plot Four plot_four_app									
-		//To-do
+	private void endGame() {								
 	}
 }
