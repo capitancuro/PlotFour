@@ -53,13 +53,13 @@ public class PlotFour {																		//Class used to create Plot Four plot_f
 				pieces[piece] = new Piece(2, null);
 	}
 	
-	private void setPositions() {															//Sets all positions to be used during a plot_four_app
+	private void setPositions() {																//Sets all positions to be used during a plot_four_app
 		for (int row = 0; row < ROWS; row++)
 			for (int col = 0; col < COLS; col++)
 				positions[row][col] = new Position(0, row, col, null);
 	}
 	
-	private void move(int col) {															//Selects column for a move
+	private void move(int col) {																//Selects column for a move
 		
 		if (col >= 0 && col < COLS && positions[0][col].user == 0) {
 			
@@ -79,7 +79,7 @@ public class PlotFour {																		//Class used to create Plot Four plot_f
 		}
 	}
 	
-	private int win(Position position, int v, int u, int n) {							//Checks if there is a win
+	private int win(Position position, int v, int u, int n) {												//Checks if there is a win
 		if(position == null)
 			return 0;
 		
@@ -92,7 +92,7 @@ public class PlotFour {																		//Class used to create Plot Four plot_f
 				count++;
 			else
 				break;
-			//System.out.println(count);
+
 			row += v;
 			col += u;
 		}
