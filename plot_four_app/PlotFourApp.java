@@ -1,12 +1,15 @@
 package plot_four_app;
 
-import javafx.application.Application;												//Class needed for the Application
-import javafx.stage.Stage;															//Class needed for window(s) of the application
-import javafx.scene.Scene;															//Class needed to work with content accessed via the window.
-import javafx.scene.Group;
-import javafx.scene.paint.Color;
+//JAVA FX DEPENDENCIES
+import javafx.application.Application; //Class needed for the Application.
+import javafx.stage.Stage; //Class needed for window(s) of the application.
 
-public class PlotFourApp extends Application { 
+//PLOT FOUR CLASSES
+import plot_four_app.*;
+
+public class PlotFourApp extends Application {
+	
+	final Port port = new Port();
 	
 	public PlotFourApp() {
 	}
@@ -14,8 +17,7 @@ public class PlotFourApp extends Application {
 	@Override
 	public void start(Stage window){
 		window.setTitle("Plot Four");
-		Scene home_scene = new Scene(new Group(), 1000, 1000, Color.rgb(0,0, 0));
-		window.setScene(home_scene);
+		window.setScene(port);
 		window.show();
 	}
 	
