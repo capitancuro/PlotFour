@@ -1,6 +1,8 @@
-package plot_four;
+package plot_four_app;
 
-public class PlotFour {
+import javafx.scene.Group;
+
+public class PlotFour extends Group {
 	private class Piece {																	
 		
 		public int user = 0;
