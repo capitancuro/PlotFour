@@ -8,8 +8,8 @@
 <h4>Plot Four Offline Properties:</h4>
 <ol> 
   <li>Offline games</li>
-  <li>Matches over bluetooth</li>
-  <li>Matches over a LAN</li>
+  <li>Bluetooth matches</li>
+  <li>LAN matches</li>
 </ol>
 <h3 align="center">Plot Four Online</h3>
 <p>This version of Plot Four creates a version that allows for games over the internet.</p>
@@ -23,7 +23,5 @@
 <p>This version of Plot Four creates </p>
 <h4>Plot Four Offline Properties:</h4>
 <ol> 
-  <li>Offline games</li>
-  <li>Matches over bluetooth</li>
-  <li>Matches over a LAN</li>
+  <li>AI matches</li>
 </ol>
