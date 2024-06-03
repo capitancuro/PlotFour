@@ -1,4 +1,4 @@
-<h1 align="center">Plot Four Application</h1>
+<h1 align="center">Plot Four</h1>
 <p>This repository contains 3 implementations of Plot Four games using the JavaFX GUI library. Each implmentation will be released as an add on to a single application meant to demonstrate knowledge of different technical skillsets.</p>
 
 <div align="center">
