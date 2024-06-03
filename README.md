@@ -15,6 +15,10 @@
   <li>LAN  utilities</li>
 </ol>
 
+<div align="center">
+  <img src="https://github.com/capitancuro/Plot_Four/blob/main/src/assets/Plot_Four_Online.png" />
+</div>
+
 <h3 align="center">Plot Four Online</h3>
 <p>This version of Plot Four creates a version of the application that allows for games over the internet. It does so by implementing acconts, with the feature of player stats. This version also inludes chat features</p>
 
@@ -24,6 +28,10 @@
   <li>Online games</li>
   <li>Chat</li>
 </ol>
+
+<div align="center">
+  <img src="https://github.com/capitancuro/Plot_Four/blob/main/src/assets/Plot_Four_AI.png" />
+</div>
 
 <h3 align="center">Plot Four AI</h3>
 <p>This version of Plot Four utilizes machine learning to creat an AI opponent for online players.</p>
