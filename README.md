@@ -11,8 +11,8 @@
 <h4>Plot Four Offline Properties:</h4>
 <ol> 
   <li>Offline games</li>
-  <li>Bluetooth matches</li>
-  <li>LAN matches</li>
+  <li>Bluetooth games</li>
+  <li>LAN games</li>
 </ol>
 
 <h3 align="center">Plot Four Online</h3>
@@ -30,5 +30,5 @@
 
 <h4>Plot Four Offline Properties:</h4>
 <ol> 
-  <li>AI matches</li>
+  <li>AI games</li>
 </ol>
