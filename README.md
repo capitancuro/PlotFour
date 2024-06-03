@@ -32,8 +32,8 @@
 <h3 align="center">Plot Four AI</h3>
 <p>This version of Plot Four utilizes machine learning to creat an AI opponent for online players.</p>
 
-<div align="center">
-  <h4 align="center">Plot Four Offline Properties:</h4>
+<div text-align="center">
+  <h4>Plot Four Offline Properties:</h4>
   <ol> 
     <li>AI matches</li>
   </ol>
