@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">Plot Four</h1>
 <p>This repository contains 3 implementations of Plot Four games using the JavaFX GUI library. Each implmentation will be released as an add on to a single application meant to demonstrate knowledge of different technical skillsets.</p>
-<h3>Plot Four Offline</h3>
+<h3 align="center">Plot Four Offline</h3>
 <p>This version of Plot Four creates a basic application of the game to play while offline. (Later bluetooth and LAN functionalities might be implemented.)</p>
 <h4>Plot Four Offline Properties:</h4>
 <ol> 
@@ -11,7 +11,19 @@
   <li>Matches over bluetooth</li>
   <li>Matches over a LAN</li>
 </ol>
-<h3>Plot Four Online</h3>
-<p>This repository contains 3 implementations of Plot Four games. Each implmentation will be released as an add on to a single application meant to demonstrate knowledge of different technical skillsets.</p>
-<h3>Plot Four AI</h3>
-<p>This repository contains 3 implementations of Plot Four games. Each implmentation will be released as an add on to a single application meant to demonstrate knowledge of different technical skillsets.</p>
+<h3 align="center">Plot Four Online</h3>
+<p>This version of Plot Four creates a version that allows for games over the internet.</p>
+<h4>Plot Four Offline Properties:</h4>
+<ol> 
+  <li>Accounts</li>
+  <li>Online games</li>
+  <li>Chat</li>
+</ol>
+<h3 align="center">Plot Four AI</h3>
+<p>This version of Plot Four creates </p>
+<h4>Plot Four Offline Properties:</h4>
+<ol> 
+  <li>Offline games</li>
+  <li>Matches over bluetooth</li>
+  <li>Matches over a LAN</li>
+</ol>
