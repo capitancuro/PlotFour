@@ -3,3 +3,4 @@
 </p>
 
 <h1 align="center"> Plot Four</h1>
+This repository contains 3 implementations of Plot Four games. Each implmentation will be released as an add on to a single application meant to demonstrate knowledge of different technical skillsets.
