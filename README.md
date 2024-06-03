@@ -15,7 +15,7 @@
 <p>This version of Plot Four creates a version of the application that allows for games over the internet. It does so by implementing acconts, with the feature of player stats. This version also inludes chat features</p>
 <h4 align="center">Plot Four Offline Properties:</h4>
 <ol align="center"> 
-  <li>Accounts</li>
+  <li align="center">Accounts</li>
   <li>Online games</li>
   <li>Chat</li>
 </ol>
