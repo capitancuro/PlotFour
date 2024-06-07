@@ -1,8 +1,17 @@
 package plot_four_app;
 
 import javafx.scene.Group;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.FontPosture;
+import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 public class PlotFour extends Group {
+	
 	private class Piece {																	
 		
 		public int user = 0;
@@ -38,6 +47,8 @@ public class PlotFour extends Group {
 	private int turn = 0;
 	private int currentUnit = 0;
 	private int winner = 0;
+	
+	public String ass = "8==D";
 	
 	public PlotFour() {
 		startGame();
