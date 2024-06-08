@@ -1,7 +1,9 @@
-package plot_four_app;
+package contexts;
 
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -12,12 +14,13 @@ import javafx.event.EventHandler;
 
 public class PlotFour extends Group {
 	
-	private class Piece {																	
+	private class Piece extends Circle{																	
 		
 		public int user = 0;
 		public Position position = null;
 		
-		public Piece(int user, Position position) {
+		public Piece(int user, Position position, double radius) {
+			super(radius);
 			this.user = user;
 			this.position = position;
 		}
@@ -57,9 +60,19 @@ public class PlotFour extends Group {
 	private void setPieces() {
 		for (int piece = 0; piece < UNITS; piece++)
 			if (piece % 2 == 0)
-				pieces[piece] = new Piece(1, null);
+				pieces[piece] = new Piece(1, null, 25);
 			else
-				pieces[piece] = new Piece(2, null);
+				pieces[piece] = new Piece(2, null, 25);
+		
+		pieces[0].setCenterX(200);
+		pieces[0].setCenterY(200);
+		pieces[0].setStroke(Color.YELLOW);
+		this.getChildren().add(pieces[0]);
+		
+		pieces[1].setCenterX(500);
+		pieces[1].setCenterY(500);
+		pieces[1].setStroke(Color.RED);
+		this.getChildren().add(pieces[1]);
 	}
 	
 	private void setPositions() {
