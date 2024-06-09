@@ -1,7 +1,7 @@
 package plot_four_app;
 
 import assets.AssetsManager;
-
+import contexts.Controller;
 //JAVA FX DEPENDENCIES
 import javafx.application.Application; //Class needed for the Application
 import javafx.stage.Stage; //Class needed for window(s) of the application
@@ -10,11 +10,12 @@ import javafx.scene.image.Image;
 //PLOT FOUR CLASSES
 import plot_four_app.*;
 
-import plot_four_app.Controller;
-
 public class PlotFourApp extends Application {
 	
-	final Port port = new Port(new AssetsManager(), new Controller());
+	final private double WIDTH = 1000;
+	final private double HEIGHT = 1000;
+	
+	final private Port port = new Port(WIDTH, HEIGHT, new AssetsManager(), new Controller());
 	
 	public PlotFourApp() {
 	}
