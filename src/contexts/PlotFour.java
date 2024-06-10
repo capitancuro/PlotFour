@@ -20,8 +20,8 @@ public class PlotFour extends Group {
 		public int user = 0;
 		public Position position = null;
 		
-		public Piece(int user, double radius) {
-			super(radius);
+		public Piece(int user) {
+			super(25);
 			this.user = user;
 		}
 	}
@@ -33,8 +33,8 @@ public class PlotFour extends Group {
 		public int col = 0;
 		public Piece piece = null;
 		
-		public Position(int row, int col, double x, double y, double width, double height) {
-			super(x, y, width, height);
+		public Position(int row, int col, double x, double y) {
+			super(x, y, 50, 50);
 			this.row = row;
 			this.col = col;
 		}
@@ -63,15 +63,18 @@ public class PlotFour extends Group {
 	}
 	
 	private void setPieces() {
+		
 		for (int piece = 0; piece < UNITS; piece++) {
-			if (piece % 2 == 0) {
-				pieces[piece] = new Piece(1, 25);
-				pieces[1].setStroke(Color.RED);
-			}
-			else {
-				pieces[piece] = new Piece(2, 25);
-				pieces[0].setStroke(Color.YELLOW);
-			}
+			
+			if (piece % 2 == 0)
+				pieces[piece] = new Piece(1);
+			else 
+				pieces[piece] = new Piece(2);
+			
+			pieces[piece].setStroke(Color.TRANSPARENT);
+			pieces[piece].setStrokeWidth(5);
+			
+			this.getChildren().add(pieces[piece]);
 		}
 	}
 	
@@ -81,8 +84,9 @@ public class PlotFour extends Group {
 		for (int row = 0; row < ROWS; row++) {
 			double x = width/2 - (COLS*50)/2;
 			for (int col = 0; col < COLS; col++) {
-				positions[row][col] = new Position(row, col, x, y, 50, 50);
+				positions[row][col] = new Position(row, col, x, y);
 				positions[row][col].setStroke(Color.WHITE);
+				positions[row][col].setStrokeWidth(5);
 				this.getChildren().add(positions[row][col]);
 				x += 50;
 			}
@@ -160,7 +164,7 @@ public class PlotFour extends Group {
 	
 	private void startGame() {
 		
-		//setPieces();
+		setPieces();
 		setPositions();
 		
 		while(currentUnit < 42 && winner == 0) {
