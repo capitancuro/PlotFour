@@ -1,8 +1,6 @@
 package contexts;
 
-
 import assets.AssetsManager;
-
 
 import javafx.scene.layout.VBox;
 import javafx.geometry.Pos;
@@ -21,14 +19,9 @@ import javafx.event.EventHandler;
 
 public class StartMenu extends VBox {
 	
-	private class StartHandler implements EventHandler<ActionEvent> {
-		@Override
-		public void handle(ActionEvent event) {
-			System.out.println("FUCK ERICA");
-		}
-	}
-	
-	private final AssetsManager assets = new AssetsManager();
+	public AssetsManager assetsManager = null;
+	public Controller controller = null;
+
 	
 	private final Image plot_four_icon = new Image("/assets/Plot_Four.png");
 	private final ImageView plot_four_view = new ImageView(plot_four_icon);
@@ -37,7 +30,10 @@ public class StartMenu extends VBox {
 	
 	private final Button startButton = new Button("START");
 	
-	public StartMenu() {
+	public StartMenu(AssetsManager assetsManager, Controller controller) {
+		this.assetsManager = assetsManager;
+		this.controller = controller;
+		
 		this.setAlignment(Pos.CENTER);
 		this.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 		this.setSpacing(25);
@@ -45,18 +41,21 @@ public class StartMenu extends VBox {
 		plot_four_view.setFitWidth(200);
 		plot_four_view.setFitHeight(100); 	
 		
-		plot_four_title.setFont(Font.loadFont(assets.font, 32));
+		plot_four_title.setFont(Font.loadFont(assetsManager.font, 32));
 		plot_four_title.setFill(Color.WHITE);
 		
 		startButton.setFont(Font.font("Roboto", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 16));
 		startButton.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
 		startButton.setTextFill(Color.WHITE);
-		StartHandler startHandler = new StartHandler();
-		startButton.setOnAction(startHandler);
+		
+		startButton.setOnMouseClicked(event -> {
+			PlotFour plot_four = (PlotFour) this.controller.contexts[1];
+			controller.changeContext();
+			plot_four.startGame();
+		});
 		
 		this.getChildren().add(plot_four_view);
 		this.getChildren().add(plot_four_title);
 		this.getChildren().add(startButton);
 	}
-	
 }
