@@ -1,14 +1,13 @@
-package plot_four_app;
+package contexts;
 
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-
+import plot_four_app.Port;
 public class Controller {
 	
-	public Scene scene = null;
+	public Port port = null;
 	public Parent[] contexts = null;
 	
 	public void changeContext() {
-		scene.setRoot(contexts[1]);
+		port.setRoot(contexts[1]);
 	}
 }
