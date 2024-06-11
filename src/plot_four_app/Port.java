@@ -16,6 +16,7 @@ public class Port extends Scene {
 	
 	public AssetsManager assetsManager = null;
 	public Controller controller = null;
+
 	
 	public Port(double width, double height, AssetsManager assetsManager, Controller controller) {
 		super(new StartMenu(assetsManager, controller), width, height, Color.BLACK);
@@ -32,6 +33,6 @@ public class Port extends Scene {
 	
 	private void setContexts() {
 		controller.contexts[0] = this.getRoot();
-		controller.contexts[1] = new PlotFour(width, height);
+		controller.contexts[1] = new PlotFour(width, height, assetsManager, controller);
 	}
 }
