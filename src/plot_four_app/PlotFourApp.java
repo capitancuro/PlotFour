@@ -25,7 +25,7 @@ public class PlotFourApp extends Application {
 		window.getIcons().add(new Image("/assets/Plot_Four.png"));
 		window.setTitle("Plot Four");
 		
-		port.controller.scene = port;
+		port.controller.port = port;
 		window.setScene(port);
 		
 		window.show();
