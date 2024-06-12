@@ -12,8 +12,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.FontPosture;
 import javafx.scene.control.Button;
 import assets.AssetsManager;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 import java.lang.Math;
 
@@ -44,7 +42,16 @@ public class PlotFour extends Group {
 		}
 	}
 	
-	private class Selector extends Polygon{
+	private class Selector extends Polygon {
+		public Piece currentPiece = null;
+		
+		public void setCurrentPiece(Piece currentPiece) {
+			currentPiece.setCenterX(this.getPoints().get(4));
+			currentPiece.setCenterY(this.getPoints().get(5));
+			//currentPiece.setFill(Color.TRANSPARENT);
+			//currentPiece.setStroke(Color.RED);
+			this.currentPiece = currentPiece;
+		}
 	}
 	
 	private double width = 0;
@@ -59,7 +66,7 @@ public class PlotFour extends Group {
 	private Position[][] positions = new Position[ROWS][COLS];
 	private final int UNITS = 42;
 	private Piece[] pieces = new Piece[UNITS];
-	private Selector selector = null;
+	private final Selector selector = new Selector();
 	
 	private int turn = 0;
 	private int currentUnit = 0;
@@ -83,8 +90,7 @@ public class PlotFour extends Group {
 			else 
 				pieces[piece] = new Piece(2);
 			
-			pieces[piece].setStroke(Color.TRANSPARENT);
-			pieces[piece].setStrokeWidth(5);
+			pieces[piece].setFill(Color.TRANSPARENT);
 			
 			this.getChildren().add(pieces[piece]);
 		}
@@ -98,7 +104,6 @@ public class PlotFour extends Group {
 			for (int col = 0; col < COLS; col++) {
 				positions[row][col] = new Position(row, col, x, y);
 				positions[row][col].setStroke(Color.WHITE);
-				positions[row][col].setStrokeWidth(5);
 				this.getChildren().add(positions[row][col]);
 				x += 50;
 			}
@@ -106,21 +111,23 @@ public class PlotFour extends Group {
 		}
 	}
 	
-	private void setSelector(Position center) {
-		selector = new Selector();
-		
-		selector.setFill(Color.LIGHTYELLOW);
+	private void setSelector() {
+		selector.setFill(Color.WHITE);
 		
 		//Point 1
-		selector.getPoints().add(center.getX());
-		selector.getPoints().add(center.getY() - 50);
-		//Point 2
-		selector.getPoints().add(center.getX() + 50);
-		selector.getPoints().add(center.getY() - 50);
-		//Point 3
-		selector.getPoints().add(center.getX() + 25);
-		selector.getPoints().add(center.getY() - 25);
+		selector.getPoints().add(positions[0][3].getX());
+		selector.getPoints().add(positions[0][3].getY() - 50);
 		
+		//Point 2
+		selector.getPoints().add(positions[0][3].getX() + 50);
+		selector.getPoints().add(positions[0][3].getY() - 50);
+		
+		//Point 3
+		selector.getPoints().add(positions[0][3].getX() + 25);
+		selector.getPoints().add(positions[0][3].getY() - 25);
+		
+		selector.setCurrentPiece(pieces[currentUnit]);
+
 		this.getChildren().add(selector);
 		
 		selector.toBack();
@@ -197,7 +204,7 @@ public class PlotFour extends Group {
 	private void setGame() {
 		setPieces();
 		setPositions();
-		setSelector(positions[0][3]);
+		setSelector();
 	}
 	
 	public void startGame() {
@@ -212,20 +219,12 @@ public class PlotFour extends Group {
 					col++;
 				
 				selector.setTranslateX(positions[0][col].getX() - selector.getPoints().get(0));
+				selector.currentPiece.setTranslateX(positions[0][col].getX() - selector.currentPiece.getCenterX() + 25);
 			}
 		});
 		
 		controller.port.setOnMouseClicked(event -> {
-			if(event.getSceneX() >= positions[0][0].getX() && event.getSceneX() < positions[0][6].getX() + 50) 
-			{
-				int col = 0;
-				
-				while(Math.abs(positions[0][col].getX() - event.getSceneX()) > 50)
-					col++;
-				
-				pieces[0].setFill(Color.RED);
-				pieces[0].setCenterX(100);
-				pieces[0].setCenterY(100);
+			if(event.getSceneX() >= positions[0][0].getX() && event.getSceneX() < positions[0][6].getX() + 50) {
 			}
 		});
 	}
