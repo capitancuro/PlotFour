@@ -103,6 +103,7 @@ public class PlotFour extends Group {
 			double x = width/2 - (COLS*50)/2;
 			for (int col = 0; col < COLS; col++) {
 				positions[row][col] = new Position(row, col, x, y);
+				positions[row][col].setFill(Color.TRANSPARENT);
 				positions[row][col].setStroke(Color.WHITE);
 				this.getChildren().add(positions[row][col]);
 				x += 50;
@@ -134,6 +135,10 @@ public class PlotFour extends Group {
 	}
 	
 	private void move(int col) {
+		if(selector.currentPiece.user == 1)
+			selector.currentPiece.setFill(Color.RED);
+		else 
+			selector.currentPiece.setFill(Color.YELLOW);
 		
 		if (col >= 0 && col < COLS && positions[0][col].user == 0) {
 			
@@ -141,7 +146,11 @@ public class PlotFour extends Group {
 			while(row < ROWS && positions[row][col].user == 0)
 				row++;
 			
-			positions[row - 1][col].user = pieces[currentUnit].user;
+			positions[row - 1][col].piece = selector.currentPiece;
+			positions[row - 1][col].user = positions[row - 1][col].piece.user;
+			positions[row - 1][col].piece.setTranslateX(positions[row - 1][col].getX() - selector.currentPiece.getCenterX() + 25);
+			positions[row - 1][col].piece.setTranslateY(positions[row - 1][col].getY() - selector.currentPiece.getCenterY() + 25);
+			
 			winner = win(positions[row - 1][col], -1, 0, 0);
 
 			if (turn == 0)
@@ -150,6 +159,13 @@ public class PlotFour extends Group {
 				turn = 0;
 			
 			currentUnit++;
+			
+			if(currentUnit < UNITS && winner == 0)
+				selector.setCurrentPiece(pieces[currentUnit]);
+			else {
+				selector.currentPiece = null;
+				selector.setFill(Color.TRANSPARENT);
+			}
 		}
 	}
 	
@@ -211,21 +227,30 @@ public class PlotFour extends Group {
 		
 		setGame();
 		controller.port.setOnMouseMoved(event ->{
-			if(event.getSceneX() >= positions[0][0].getX() && event.getSceneX() < positions[0][6].getX() + 50) 
-			{
-				int col = 0;
-				
-				while(Math.abs(positions[0][col].getX() - event.getSceneX()) > 50)
-					col++;
-				
-				selector.setTranslateX(positions[0][col].getX() - selector.getPoints().get(0));
-				selector.currentPiece.setTranslateX(positions[0][col].getX() - selector.currentPiece.getCenterX() + 25);
-			}
+			
+			if (currentUnit < UNITS && winner == 0)
+				if(event.getSceneX() >= positions[0][0].getX() && event.getSceneX() < positions[0][6].getX() + 50) {
+					int col = 0;
+					
+					while(Math.abs(positions[0][col].getX() - event.getSceneX()) > 50)
+						col++;
+					
+					selector.setTranslateX(positions[0][col].getX() - selector.getPoints().get(0));
+					selector.currentPiece.setTranslateX(positions[0][col].getX() - selector.currentPiece.getCenterX() + 25);
+				}
 		});
 		
 		controller.port.setOnMouseClicked(event -> {
-			if(event.getSceneX() >= positions[0][0].getX() && event.getSceneX() < positions[0][6].getX() + 50) {
-			}
+			
+			if (currentUnit < UNITS && winner == 0)
+				if(event.getSceneX() >= positions[0][0].getX() && event.getSceneX() < positions[0][6].getX() + 50) {
+					int col = 0;
+					
+					while(Math.abs(positions[0][col].getX() - event.getSceneX()) > 50)
+						col++;
+					
+					move(col);
+				}
 		});
 	}
 	
