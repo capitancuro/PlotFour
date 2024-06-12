@@ -12,10 +12,10 @@ import plot_four_app.*;
 
 public class PlotFourApp extends Application {
 	
-	final private double WIDTH = 1000;
-	final private double HEIGHT = 1000;
+	private final double WIDTH = 1000;
+	private final double HEIGHT = 500;
 	
-	final private Port port = new Port(WIDTH, HEIGHT, new AssetsManager(), new Controller());
+	private Port port = new Port(WIDTH, HEIGHT, new AssetsManager(), new Controller());
 	
 	public PlotFourApp() {
 	}
@@ -24,10 +24,11 @@ public class PlotFourApp extends Application {
 	public void start(Stage window) {
 		window.getIcons().add(new Image("/assets/Plot_Four.png"));
 		window.setTitle("Plot Four");
+		window.setResizable(false);
 		
 		port.controller.port = port;
-		window.setScene(port);
 		
+		window.setScene(port);
 		window.show();
 	}
 	
