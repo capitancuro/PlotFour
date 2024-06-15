@@ -2,20 +2,32 @@ package contexts;
 
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.FontPosture;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.control.Button;
 import assets.AssetsManager;
 
 import java.lang.Math;
 
 public class PlotFour extends Group {
+	
+	private class Record extends Group {
+		
+		public Text text = new Text("WINS");
+		public Circle user = new Circle();
+		
+		public Record() {
+			text.setFont(Font.loadFont(assetsManager.getFont(), 25));
+			text.setFill(Color.WHITE);
+			text.setX(PlotFour.this.width/2 - text.getLayoutBounds().getWidth()/2);
+			text.setY(PlotFour.this.positions[0][3].getY() - 25);
+			this.getChildren().add(text);
+		}
+	}
 	
 	private class Piece extends Circle{																	
 		
@@ -61,6 +73,8 @@ public class PlotFour extends Group {
 	private final int ROWS = 6;
 	private final int COLS = 7;
 	
+	private Record record = null;
+	
 	private Position[][] positions = new Position[ROWS][COLS];
 	private final int UNITS = 42;
 	private Piece[] pieces = new Piece[UNITS];
@@ -71,11 +85,16 @@ public class PlotFour extends Group {
 	
 	public PlotFour(double width, double height, AssetsManager assetsManager, Controller controller) {
 		
+		this.width = width; //integrate into controller class
+		this.height = height;
+		
 		this.assetsManager = assetsManager;
 		this.controller = controller;
-		
-		this.width = width;
-		this.height = height;
+	}
+	
+	private void setRecord() {
+		record = new Record();
+		this.getChildren().add(record);
 	}
 	
 	private void setPieces() {
@@ -213,6 +232,7 @@ public class PlotFour extends Group {
 		setPieces();
 		setPositions();
 		setSelector();
+		setRecord();
 	}
 	
 	public void startGame() {
