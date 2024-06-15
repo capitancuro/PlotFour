@@ -48,8 +48,6 @@ public class PlotFour extends Group {
 		public void setCurrentPiece(Piece currentPiece) {
 			currentPiece.setCenterX(this.getPoints().get(4));
 			currentPiece.setCenterY(this.getPoints().get(5));
-			//currentPiece.setFill(Color.TRANSPARENT);
-			//currentPiece.setStroke(Color.RED);
 			this.currentPiece = currentPiece;
 		}
 	}
@@ -68,7 +66,6 @@ public class PlotFour extends Group {
 	private Piece[] pieces = new Piece[UNITS];
 	private final Selector selector = new Selector();
 	
-	private int turn = 0;
 	private int currentUnit = 0;
 	private int winner = 0;
 	
@@ -152,11 +149,6 @@ public class PlotFour extends Group {
 			positions[row - 1][col].piece.setTranslateY(positions[row - 1][col].getY() - selector.currentPiece.getCenterY() + 25);
 			
 			winner = win(positions[row - 1][col], -1, 0, 0);
-
-			if (turn == 0)
-				turn = 1;
-			else
-				turn = 0;
 			
 			currentUnit++;
 			
@@ -257,4 +249,3 @@ public class PlotFour extends Group {
 	private void endGame() {								
 	}
 }
-...
