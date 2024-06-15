@@ -12,10 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.FontPosture;
 import javafx.scene.control.Button;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 public class StartMenu extends VBox {
 	
@@ -44,7 +41,7 @@ public class StartMenu extends VBox {
 		plot_four_title.setFont(Font.loadFont(assetsManager.font, 32));
 		plot_four_title.setFill(Color.WHITE);
 		
-		startButton.setFont(Font.font("Roboto", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 16));
+		startButton.setFont(Font.font("Roboto", FontWeight.EXTRA_BOLD, 16));
 		startButton.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
 		startButton.setTextFill(Color.WHITE);
 		
