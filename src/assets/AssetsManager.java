@@ -9,4 +9,8 @@ public class AssetsManager {
 	public AssetsManager() {
 		font = AssetsManager.class.getResourceAsStream("PressStart2P-Regular.ttf");
 	}
+	
+	public InputStream getFont() {
+		return AssetsManager.class.getResourceAsStream("PressStart2P-Regular.ttf");
+	}
 }
