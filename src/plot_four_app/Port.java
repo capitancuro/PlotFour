@@ -1,5 +1,7 @@
 package plot_four_app;
 
+import java.util.HashMap;
+
 import assets.AssetsManager;
 
 import javafx.scene.Scene; //Needed to work with content accessed via the Port
@@ -27,12 +29,12 @@ public class Port extends Scene {
 		this.assetsManager = assetsManager;
 		this.controller = controller;
 		
-		controller.contexts = new Parent[2];
+		controller.contexts = new HashMap<String, Parent>();
 		setContexts();
 	}
 	
 	private void setContexts() {
-		controller.contexts[0] = this.getRoot();
-		controller.contexts[1] = new PlotFour(width, height, assetsManager, controller);
+		controller.contexts.put("Start Menu", getRoot());
+		controller.contexts.put("Plot Four", new PlotFour(width, height, assetsManager, controller));
 	}
 }
