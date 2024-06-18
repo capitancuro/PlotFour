@@ -38,7 +38,7 @@ public class StartMenu extends VBox {
 		plot_four_view.setFitWidth(200);
 		plot_four_view.setFitHeight(100); 	
 		
-		plot_four_title.setFont(Font.loadFont(assetsManager.font, 32));
+		plot_four_title.setFont(Font.loadFont(assetsManager.getFont(), 32));
 		plot_four_title.setFill(Color.WHITE);
 		
 		startButton.setFont(Font.font("Roboto", FontWeight.EXTRA_BOLD, 16));
