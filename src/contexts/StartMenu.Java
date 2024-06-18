@@ -46,9 +46,19 @@ public class StartMenu extends VBox {
 		startButton.setTextFill(Color.WHITE);
 		
 		startButton.setOnMouseClicked(event -> {
+			controller.changeContext("Plot Four");
 			PlotFour plot_four = (PlotFour) this.controller.contexts.get("Plot Four");
-			controller.changeContext();
 			plot_four.startGame();
+		});
+		
+		startButton.setOnMouseEntered(event -> {
+			startButton.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+			startButton.setTextFill(Color.BLACK);
+		});
+		
+		startButton.setOnMouseExited(event -> {
+			startButton.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+			startButton.setTextFill(Color.WHITE);
 		});
 		
 		this.getChildren().add(plot_four_view);
