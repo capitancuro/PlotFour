@@ -1,5 +1,7 @@
 package contexts;
 
+import java.lang.Math;
+
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -7,11 +9,11 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import javafx.scene.control.Button;
-import assets.AssetsManager;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;  
 
-import java.lang.Math;
+import assets.AssetsManager;
 
 public class PlotFour extends Group {
 	
@@ -93,6 +95,9 @@ public class PlotFour extends Group {
 	private double width = 0;
 	private double height = 0;
 	
+	Media audio = null;
+	MediaPlayer audioPlayer = null;
+	
 	public AssetsManager assetsManager = null;
 	public Controller controller = null;
 	
@@ -116,6 +121,10 @@ public class PlotFour extends Group {
 		
 		this.assetsManager = assetsManager;
 		this.controller = controller;
+		
+		audio = new Media(assetsManager.getDropAudio());
+		audioPlayer = new MediaPlayer(audio);
+		audioPlayer.setVolume(.25);
 	}
 	
 	private void setRecord() {
@@ -289,6 +298,8 @@ public class PlotFour extends Group {
 						col++;
 					
 					move(col);
+					audioPlayer.play();
+					audioPlayer.seek(audioPlayer.getStartTime());
 				}
 		});
 	}
