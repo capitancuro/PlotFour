@@ -16,7 +16,10 @@ import javafx.scene.media.MediaPlayer;
 import assets.AssetsManager;
 
 public class PlotFour extends Group {
-	
+
+private class LiveMenu {
+}
+
 	private class Record extends Group {
 		
 		public Text text = new Text("WINS");
