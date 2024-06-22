@@ -16,10 +16,24 @@ import javafx.scene.media.MediaPlayer;
 import assets.AssetsManager;
 
 public class PlotFour extends Group {
-
-private class LiveMenu {
-}
-
+	
+	private class LiveMenu extends Group {
+		public Button newGame = null;
+		public Button forfeit = null;
+		public Button pauseMenu = null;
+		
+		public LiveMenu() {
+			newGame = new Button("NEW GAME");
+			newGame.setOnMouseClicked(null);
+			
+			forfeit = new Button("FORFEIT");
+			forfeit.setOnMouseClicked(null);
+			
+			pauseMenu = new Button("MENU");
+			pauseMenu.setOnMouseClicked(null);
+		}
+	}
+	
 	private class Record extends Group {
 		
 		public Text text = new Text("WINS");
@@ -226,7 +240,7 @@ private class LiveMenu {
 		int row = position.row, col = position.col, count = 0;
 
 																												
-		while ((row >= 0 && col >= 0) && (row < positions.length && col < positions[row].length)) {
+		while ((row >= 0 && col >= 0) && (row < ROWS && col < COLS)) {
 
 			if (positions[row][col].user == position.user)
 				count++;
