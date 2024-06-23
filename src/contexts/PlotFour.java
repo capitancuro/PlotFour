@@ -9,7 +9,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;  
 
@@ -25,12 +28,30 @@ public class PlotFour extends Group {
 		public LiveMenu() {
 			newGame = new Button("NEW GAME");
 			newGame.setOnMouseClicked(null);
+			newGame.setFont(Font.loadFont(assetsManager.getFont(), 15));
+			newGame.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+			newGame.setTextFill(Color.WHITE);
+			newGame.setLayoutX(50);
+			newGame.setLayoutY(PlotFour.this.positions[0][3].getY() - 50);
+			//this.getChildren().add(newGame);
 			
 			forfeit = new Button("FORFEIT");
 			forfeit.setOnMouseClicked(null);
+			forfeit.setFont(Font.loadFont(assetsManager.getFont(), 15));
+			forfeit.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+			forfeit.setTextFill(Color.WHITE);
+			forfeit.setLayoutX(50);
+			forfeit.setLayoutY(newGame.getLayoutY());
+			this.getChildren().add(forfeit);
 			
 			pauseMenu = new Button("MENU");
 			pauseMenu.setOnMouseClicked(null);
+			pauseMenu.setFont(Font.loadFont(assetsManager.getFont(), 15));
+			pauseMenu.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+			pauseMenu.setTextFill(Color.WHITE);
+			pauseMenu.setLayoutX(50);
+			pauseMenu.setLayoutY(forfeit.getLayoutY() + 50);
+			this.getChildren().add(pauseMenu);
 		}
 	}
 	
@@ -120,6 +141,8 @@ public class PlotFour extends Group {
 	
 	private final int ROWS = 6;
 	private final int COLS = 7;
+	
+	private LiveMenu liveMenu = null;
 	
 	private Record record = null;
 	
@@ -286,6 +309,8 @@ public class PlotFour extends Group {
 		setPositions();
 		setSelector();
 		setRecord();
+		liveMenu = new LiveMenu();
+		this.getChildren().add(liveMenu);
 	}
 	
 	public void startGame() {
