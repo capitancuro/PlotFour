@@ -32,7 +32,7 @@ public class PlotFour extends Group {
 			newGame.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
 			newGame.setTextFill(Color.WHITE);
 			newGame.setLayoutX(50);
-			newGame.setLayoutY(PlotFour.this.positions[0][3].getY() - 50);
+			newGame.setLayoutY(positions[0][3].getY() - 50);
 			//this.getChildren().add(newGame);
 			
 			newGame.setOnMouseClicked(null);
@@ -103,11 +103,11 @@ public class PlotFour extends Group {
 			text.setFont(Font.loadFont(assetsManager.getFont(), 25));
 			text.setFill(Color.TRANSPARENT);
 			
-			user.setCenterX(PlotFour.this.width/2 - (user.getRadius()*2 + 25 + text.getLayoutBounds().getWidth())/2 + 25);
+			user.setCenterX(width/2 - (user.getRadius()*2 + 25 + text.getLayoutBounds().getWidth())/2 + 25);
 			text.setX(user.getCenterX() + 50);
 			
-			text.setY(PlotFour.this.positions[0][3].getY() - 25);
-			user.setCenterY((PlotFour.this.positions[0][3].getY() - 25) - text.getLayoutBounds().getHeight()/2);
+			text.setY(positions[0][3].getY() - 25);
+			user.setCenterY((positions[0][3].getY() - 25) - text.getLayoutBounds().getHeight()/2);
 			
 			this.getChildren().add(user);
 			this.getChildren().add(text);
@@ -124,7 +124,7 @@ public class PlotFour extends Group {
 			}
 			else {
 				text.setText("DRAW");
-				text.setX(PlotFour.this.width/2 - text.getLayoutBounds().getWidth()/2);
+				text.setX(width/2 - text.getLayoutBounds().getWidth()/2);
 			}
 			
 		}
@@ -167,10 +167,12 @@ public class PlotFour extends Group {
 		
 		public int slide(MouseEvent event) {
 			
-			int col = 0;
+			int col = -1;
 			
 			if (currentUnit < UNITS && winner == 0)
 				if(event.getSceneX() >= positions[0][0].getX() && event.getSceneX() < positions[0][6].getX() + 50) {
+					
+					col = 0;
 					
 					while(Math.abs(positions[0][col].getX() - event.getSceneX()) > 50)
 						col++;
@@ -179,7 +181,19 @@ public class PlotFour extends Group {
 					this.currentPiece.setTranslateX(positions[0][col].getX() - this.currentPiece.getCenterX() + 25);
 				}
 			
-			return col;
+			return (col > -1)? col: -1;
+		}
+		
+		public void select(MouseEvent event) {
+			
+			int col = slide(event);
+			
+			if(col > -1) {
+				move(col);
+				audioPlayer.play();
+				audioPlayer.seek(audioPlayer.getStartTime());
+			}
+			
 		}
 	}
 	
@@ -376,18 +390,7 @@ public class PlotFour extends Group {
 		});
 		
 		controller.port.setOnMouseClicked(event -> {
-			
-			if (currentUnit < UNITS && winner == 0)
-				if(event.getSceneX() >= positions[0][0].getX() && event.getSceneX() < positions[0][6].getX() + 50) {
-					int col = 0;
-					
-					while(Math.abs(positions[0][col].getX() - event.getSceneX()) > 50)
-						col++;
-					
-					move(col);
-					audioPlayer.play();
-					audioPlayer.seek(audioPlayer.getStartTime());
-				}
+			selector.select(event);
 		});
 	}
 	
