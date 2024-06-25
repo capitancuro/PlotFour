@@ -292,6 +292,10 @@ public class PlotFour extends Group {
 		selector.toBack();
 	}
 	
+	private void setMenu() {
+		
+	}
+	
 	private void move(int col) {
 		if(selector.currentPiece.user == 1)
 			selector.currentPiece.setFill(Color.RED);
@@ -381,6 +385,7 @@ public class PlotFour extends Group {
 	public void startGame() {
 		
 		setGame();
+		
 		controller.port.setOnMouseMoved(event ->{
 			selector.slide(event);
 		});
