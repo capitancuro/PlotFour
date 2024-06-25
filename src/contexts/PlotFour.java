@@ -302,14 +302,13 @@ public class PlotFour extends Group {
 
 			if (positions[row][col].user == position.user)
 				count++;
-			else
+			else if (row != position.row || col != position.col || count == 4)
 				break;
 
 			row += v;
 			col += u;
 		}
 		
-																												
 		row = position.row; 
 		col = position.col; 
 
@@ -317,12 +316,11 @@ public class PlotFour extends Group {
 
 			if (positions[row][col].user == position.user && (row != position.row || col != position.col))		
 				count++;
-			else if (row != position.row || col != position.col)
+			else if (row != position.row || col != position.col || count == 4)
 				break;
 
 			row += v * -1;
 			col += u * -1;
-
 		}
 
 		if (count == 4)
@@ -352,6 +350,20 @@ public class PlotFour extends Group {
 		
 		setGame();
 		controller.port.setOnMouseMoved(event ->{
+			
+			if (currentUnit < UNITS && winner == 0)
+				if(event.getSceneX() >= positions[0][0].getX() && event.getSceneX() < positions[0][6].getX() + 50) {
+					int col = 0;
+					
+					while(Math.abs(positions[0][col].getX() - event.getSceneX()) > 50)
+						col++;
+					
+					selector.setTranslateX(positions[0][col].getX() - selector.getPoints().get(0));
+					selector.currentPiece.setTranslateX(positions[0][col].getX() - selector.currentPiece.getCenterX() + 25);
+				}
+		});
+		
+		controller.port.setOnMouseDragged(event ->{
 			
 			if (currentUnit < UNITS && winner == 0)
 				if(event.getSceneX() >= positions[0][0].getX() && event.getSceneX() < positions[0][6].getX() + 50) {
