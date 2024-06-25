@@ -27,13 +27,24 @@ public class PlotFour extends Group {
 		
 		public LiveMenu() {
 			newGame = new Button("NEW GAME");
-			newGame.setOnMouseClicked(null);
 			newGame.setFont(Font.loadFont(assetsManager.getFont(), 15));
 			newGame.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
 			newGame.setTextFill(Color.WHITE);
 			newGame.setLayoutX(50);
 			newGame.setLayoutY(PlotFour.this.positions[0][3].getY() - 50);
 			//this.getChildren().add(newGame);
+			
+			newGame.setOnMouseClicked(null);
+			
+			newGame.setOnMouseEntered(event -> {
+				newGame.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+				newGame.setTextFill(Color.BLACK);
+			});
+			
+			newGame.setOnMouseExited(event -> {
+				newGame.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+				newGame.setTextFill(Color.WHITE);
+			});
 			
 			forfeit = new Button("FORFEIT");
 			forfeit.setOnMouseClicked(null);
@@ -44,6 +55,18 @@ public class PlotFour extends Group {
 			forfeit.setLayoutY(newGame.getLayoutY());
 			this.getChildren().add(forfeit);
 			
+			forfeit.setOnMouseClicked(null);
+			
+			forfeit.setOnMouseEntered(event -> {
+				forfeit.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+				forfeit.setTextFill(Color.BLACK);
+			});
+			
+			forfeit.setOnMouseExited(event -> {
+				forfeit.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+				forfeit.setTextFill(Color.WHITE);
+			});
+			
 			pauseMenu = new Button("MENU");
 			pauseMenu.setOnMouseClicked(null);
 			pauseMenu.setFont(Font.loadFont(assetsManager.getFont(), 15));
@@ -52,6 +75,18 @@ public class PlotFour extends Group {
 			pauseMenu.setLayoutX(50);
 			pauseMenu.setLayoutY(forfeit.getLayoutY() + 50);
 			this.getChildren().add(pauseMenu);
+			
+			pauseMenu.setOnMouseClicked(null);
+			
+			pauseMenu.setOnMouseEntered(event -> {
+				pauseMenu.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+				pauseMenu.setTextFill(Color.BLACK);
+			});
+			
+			pauseMenu.setOnMouseExited(event -> {
+				pauseMenu.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
+				pauseMenu.setTextFill(Color.WHITE);
+			});
 		}
 	}
 	
