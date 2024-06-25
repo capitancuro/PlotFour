@@ -293,7 +293,8 @@ public class PlotFour extends Group {
 	}
 	
 	private void setMenu() {
-		
+		liveMenu = new LiveMenu();
+		this.getChildren().add(liveMenu);
 	}
 	
 	private void move(int col) {
@@ -378,8 +379,6 @@ public class PlotFour extends Group {
 		setPositions();
 		setSelector();
 		setRecord();
-		liveMenu = new LiveMenu();
-		this.getChildren().add(liveMenu);
 	}
 	
 	public void startGame() {
