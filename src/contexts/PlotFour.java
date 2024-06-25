@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.media.Media;
@@ -162,6 +163,23 @@ public class PlotFour extends Group {
 			currentPiece.setCenterX(this.getPoints().get(4));
 			currentPiece.setCenterY(this.getPoints().get(5));
 			this.currentPiece = currentPiece;
+		}
+		
+		public int slide(MouseEvent event) {
+			
+			int col = 0;
+			
+			if (currentUnit < UNITS && winner == 0)
+				if(event.getSceneX() >= positions[0][0].getX() && event.getSceneX() < positions[0][6].getX() + 50) {
+					
+					while(Math.abs(positions[0][col].getX() - event.getSceneX()) > 50)
+						col++;
+					
+					this.setTranslateX(positions[0][col].getX() - this.getPoints().get(0));
+					this.currentPiece.setTranslateX(positions[0][col].getX() - this.currentPiece.getCenterX() + 25);
+				}
+			
+			return col;
 		}
 	}
 	
@@ -350,31 +368,11 @@ public class PlotFour extends Group {
 		
 		setGame();
 		controller.port.setOnMouseMoved(event ->{
-			
-			if (currentUnit < UNITS && winner == 0)
-				if(event.getSceneX() >= positions[0][0].getX() && event.getSceneX() < positions[0][6].getX() + 50) {
-					int col = 0;
-					
-					while(Math.abs(positions[0][col].getX() - event.getSceneX()) > 50)
-						col++;
-					
-					selector.setTranslateX(positions[0][col].getX() - selector.getPoints().get(0));
-					selector.currentPiece.setTranslateX(positions[0][col].getX() - selector.currentPiece.getCenterX() + 25);
-				}
+			selector.slide(event);
 		});
 		
 		controller.port.setOnMouseDragged(event ->{
-			
-			if (currentUnit < UNITS && winner == 0)
-				if(event.getSceneX() >= positions[0][0].getX() && event.getSceneX() < positions[0][6].getX() + 50) {
-					int col = 0;
-					
-					while(Math.abs(positions[0][col].getX() - event.getSceneX()) > 50)
-						col++;
-					
-					selector.setTranslateX(positions[0][col].getX() - selector.getPoints().get(0));
-					selector.currentPiece.setTranslateX(positions[0][col].getX() - selector.currentPiece.getCenterX() + 25);
-				}
+			selector.slide(event);
 		});
 		
 		controller.port.setOnMouseClicked(event -> {
