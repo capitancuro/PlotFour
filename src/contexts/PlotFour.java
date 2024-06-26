@@ -77,7 +77,9 @@ public class PlotFour extends Group {
 			pauseMenu.setLayoutY(forfeit.getLayoutY() + 50);
 			getChildren().add(pauseMenu);
 			
-			pauseMenu.setOnMouseClicked(null);
+			pauseMenu.setOnMouseClicked(event -> {
+				controller.changeContext("Pause Menu");
+			});
 			
 			pauseMenu.setOnMouseEntered(event -> {
 				pauseMenu.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
