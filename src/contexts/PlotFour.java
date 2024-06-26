@@ -54,7 +54,7 @@ public class PlotFour extends Group {
 			forfeit.setTextFill(Color.WHITE);
 			forfeit.setLayoutX(50);
 			forfeit.setLayoutY(newGame.getLayoutY());
-			this.getChildren().add(forfeit);
+			getChildren().add(forfeit);
 			
 			forfeit.setOnMouseClicked(null);
 			
@@ -75,7 +75,7 @@ public class PlotFour extends Group {
 			pauseMenu.setTextFill(Color.WHITE);
 			pauseMenu.setLayoutX(50);
 			pauseMenu.setLayoutY(forfeit.getLayoutY() + 50);
-			this.getChildren().add(pauseMenu);
+			getChildren().add(pauseMenu);
 			
 			pauseMenu.setOnMouseClicked(null);
 			
@@ -110,8 +110,8 @@ public class PlotFour extends Group {
 			text.setY(height - 50);
 			user.setCenterY((height - 50) - text.getLayoutBounds().getHeight()/2);
 			
-			this.getChildren().add(user);
-			this.getChildren().add(text);
+			getChildren().add(user);
+			getChildren().add(text);
 		}
 		
 		public void setTurn(int user) {
@@ -125,6 +125,7 @@ public class PlotFour extends Group {
 		
 		public void setWinner(int winner) {
 			text.setText("WINS");
+			text.setFont(Font.loadFont(assetsManager.getFont(), 25));
 			user.setRadius(25);
 			
 			user.setCenterX(width/2 - (user.getRadius()*2 + 25 + text.getLayoutBounds().getWidth())/2 + 25);
@@ -132,8 +133,6 @@ public class PlotFour extends Group {
 			
 			text.setY(positions[0][3].getY() - 25);
 			user.setCenterY((positions[0][3].getY() - 25) - text.getLayoutBounds().getHeight()/2);
-			
-			//text.setFill(Color.WHITE);
 			
 			if(winner == 1) {
 				user.setFill(Color.RED);
@@ -143,7 +142,7 @@ public class PlotFour extends Group {
 			}
 			else {
 				text.setText("DRAW");
-				text.setX(width/2 - text.getLayoutBounds().getWidth()/2);
+				user.setCenterX(width/2 - (user.getRadius()*2 + 25 + text.getLayoutBounds().getWidth())/2 + 25);
 			}
 			
 		}
@@ -179,8 +178,8 @@ public class PlotFour extends Group {
 		public Piece currentPiece = null;
 		
 		public void setCurrentPiece(Piece currentPiece) {
-			currentPiece.setCenterX(this.getPoints().get(4));
-			currentPiece.setCenterY(this.getPoints().get(5));
+			currentPiece.setCenterX(getPoints().get(4));
+			currentPiece.setCenterY(getPoints().get(5));
 			this.currentPiece = currentPiece;
 		}
 		
@@ -196,7 +195,7 @@ public class PlotFour extends Group {
 					while(Math.abs(positions[0][col].getX() - event.getSceneX()) > 50)
 						col++;
 					
-					this.setTranslateX(positions[0][col].getX() - this.getPoints().get(0));
+					setTranslateX(positions[0][col].getX() - getPoints().get(0));
 					this.currentPiece.setTranslateX(positions[0][col].getX() - this.currentPiece.getCenterX() + 25);
 				}
 			
@@ -255,7 +254,7 @@ public class PlotFour extends Group {
 	
 	private void setRecord() {
 		record = new Record();
-		this.getChildren().add(record);
+		getChildren().add(record);
 	}
 	
 	private void setPieces() {
@@ -269,7 +268,7 @@ public class PlotFour extends Group {
 			
 			pieces[piece].setFill(Color.TRANSPARENT);
 			
-			this.getChildren().add(pieces[piece]);
+			getChildren().add(pieces[piece]);
 		}
 	}
 	
@@ -282,7 +281,7 @@ public class PlotFour extends Group {
 				positions[row][col] = new Position(row, col, x, y);
 				positions[row][col].setFill(Color.TRANSPARENT);
 				positions[row][col].setStroke(Color.WHITE);
-				this.getChildren().add(positions[row][col]);
+				getChildren().add(positions[row][col]);
 				x += 50;
 			}
 			y += 50;
@@ -306,14 +305,14 @@ public class PlotFour extends Group {
 		
 		selector.setCurrentPiece(pieces[currentUnit]);
 
-		this.getChildren().add(selector);
+		getChildren().add(selector);
 		
 		selector.toBack();
 	}
 	
 	private void setMenu() {
 		liveMenu = new LiveMenu();
-		this.getChildren().add(liveMenu);
+		getChildren().add(liveMenu);
 	}
 	
 	private void move(int col) {
