@@ -31,9 +31,9 @@ public class StartMenu extends VBox {
 		this.assetsManager = assetsManager;
 		this.controller = controller;
 		
-		this.setAlignment(Pos.CENTER);
-		this.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
-		this.setSpacing(25);
+		setAlignment(Pos.CENTER);
+		setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+		setSpacing(25);
 		
 		plot_four_view.setFitWidth(200);
 		plot_four_view.setFitHeight(100); 	
@@ -61,8 +61,8 @@ public class StartMenu extends VBox {
 			startButton.setTextFill(Color.WHITE);
 		});
 		
-		this.getChildren().add(plot_four_view);
-		this.getChildren().add(plot_four_title);
-		this.getChildren().add(startButton);
+		getChildren().add(plot_four_view);
+		getChildren().add(plot_four_title);
+		getChildren().add(startButton);
 	}
 }
