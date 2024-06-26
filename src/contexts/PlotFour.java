@@ -93,15 +93,39 @@ public class PlotFour extends Group {
 	
 	private class Record extends Group {
 		
-		public Text text = new Text("WINS");
-		public Circle user = new Circle(25);
+		public Text text = new Text("'TURN");
+		public Circle user = new Circle(15);
 		
 		public Record() {
 			
-			user.setFill(Color.TRANSPARENT);
+		
+			setTurn(pieces[currentUnit].user);
 			
-			text.setFont(Font.loadFont(assetsManager.getFont(), 25));
-			text.setFill(Color.TRANSPARENT);
+			text.setFont(Font.loadFont(assetsManager.getFont(), 15));
+			text.setFill(Color.WHITE);
+			
+			user.setCenterX(width/2 - (user.getRadius()*2 + user.getRadius() + text.getLayoutBounds().getWidth())/2 + 25);
+			text.setX(user.getCenterX() + user.getRadius());
+			
+			text.setY(height - 50);
+			user.setCenterY((height - 50) - text.getLayoutBounds().getHeight()/2);
+			
+			this.getChildren().add(user);
+			this.getChildren().add(text);
+		}
+		
+		public void setTurn(int user) {
+			
+			if (user == 1)
+				this.user.setFill(Color.RED);
+			else
+				this.user.setFill(Color.YELLOW);
+				
+		}
+		
+		public void setWinner(int winner) {
+			text.setText("WINS");
+			user.setRadius(25);
 			
 			user.setCenterX(width/2 - (user.getRadius()*2 + 25 + text.getLayoutBounds().getWidth())/2 + 25);
 			text.setX(user.getCenterX() + 50);
@@ -109,18 +133,13 @@ public class PlotFour extends Group {
 			text.setY(positions[0][3].getY() - 25);
 			user.setCenterY((positions[0][3].getY() - 25) - text.getLayoutBounds().getHeight()/2);
 			
-			this.getChildren().add(user);
-			this.getChildren().add(text);
-		}
-		
-		public void setWinner(int user) {
-			text.setFill(Color.WHITE);
+			//text.setFill(Color.WHITE);
 			
-			if(user == 1) {
-				this.user.setFill(Color.RED);
+			if(winner == 1) {
+				user.setFill(Color.RED);
 			}
-			else if(user == 2) {
-				this.user.setFill(Color.YELLOW);
+			else if(winner == 2) {
+				user.setFill(Color.YELLOW);
 			}
 			else {
 				text.setText("DRAW");
@@ -318,8 +337,10 @@ public class PlotFour extends Group {
 			
 			currentUnit++;
 			
-			if(currentUnit < UNITS && winner == 0)
+			if(currentUnit < UNITS && winner == 0) {
 				selector.setCurrentPiece(pieces[currentUnit]);
+				record.setTurn(pieces[currentUnit].user);
+			}
 			else {
 				selector.currentPiece = null;
 				selector.setFill(Color.TRANSPARENT);
@@ -379,6 +400,7 @@ public class PlotFour extends Group {
 		setPositions();
 		setSelector();
 		setRecord();
+		setMenu();
 	}
 	
 	public void startGame() {
