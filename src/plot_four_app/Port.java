@@ -5,11 +5,13 @@ import java.util.HashMap;
 import assets.AssetsManager;
 
 import javafx.scene.Scene; //Needed to work with content accessed via the Port
+import javafx.scene.Parent;
+import javafx.scene.paint.Color;
+
 import contexts.Controller;
 import contexts.PlotFour;
 import contexts.StartMenu;
-import javafx.scene.Parent;
-import javafx.scene.paint.Color;
+import contexts.PauseMenu;
 
 public class Port extends Scene {
 	
@@ -35,6 +37,7 @@ public class Port extends Scene {
 	
 	private void setContexts() {
 		controller.contexts.put("Start Menu", getRoot());
+		controller.contexts.put("Pause Menu", new PauseMenu(assetsManager, controller));
 		controller.contexts.put("Plot Four", new PlotFour(width, height, assetsManager, controller));
 	}
 }
