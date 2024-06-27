@@ -33,6 +33,16 @@ public class PauseMenu extends VBox {
 		
 		home.setOnMouseClicked(event -> {
 			controller.changeContext("Start Menu");
+			
+			controller.port.setOnMouseMoved(null);
+			
+			controller.port.setOnMouseDragged(null);
+			
+			controller.port.setOnMouseClicked(null);
+			
+			controller.contexts.clear();
+			
+			controller.port.setContexts();
 		});
 		
 		home.setOnMouseEntered(event -> {
