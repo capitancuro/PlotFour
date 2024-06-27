@@ -33,9 +33,11 @@ public class PlotFour extends Group {
 			newGame.setTextFill(Color.WHITE);
 			newGame.setLayoutX(50);
 			newGame.setLayoutY(positions[0][3].getY() - 50);
-			//this.getChildren().add(newGame);
 			
-			newGame.setOnMouseClicked(null);
+			newGame.setOnMouseClicked(event -> {
+				getChildren().remove(newGame);
+				getChildren().add(forfeit);
+			});
 			
 			newGame.setOnMouseEntered(event -> {
 				newGame.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
@@ -56,7 +58,10 @@ public class PlotFour extends Group {
 			forfeit.setLayoutY(newGame.getLayoutY());
 			getChildren().add(forfeit);
 			
-			forfeit.setOnMouseClicked(null);
+			forfeit.setOnMouseClicked(event -> {
+				getChildren().remove(forfeit);
+				getChildren().add(newGame);
+			});
 			
 			forfeit.setOnMouseEntered(event -> {
 				forfeit.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
@@ -189,7 +194,7 @@ public class PlotFour extends Group {
 			
 			int col = -1;
 			
-			if (currentUnit < UNITS && winner == 0)
+			if (currentUnit < UNITS && winner == 0 && controller.port.getRoot() == PlotFour.this)
 				if(event.getSceneX() >= positions[0][0].getX() && event.getSceneX() < positions[0][6].getX() + 50) {
 					
 					col = 0;
@@ -201,7 +206,7 @@ public class PlotFour extends Group {
 					this.currentPiece.setTranslateX(positions[0][col].getX() - this.currentPiece.getCenterX() + 25);
 				}
 			
-			return (col > -1)? col: -1;
+			return col;
 		}
 		
 		public void select(MouseEvent event) {
@@ -240,6 +245,7 @@ public class PlotFour extends Group {
 	
 	private int currentUnit = 0;
 	private int winner = 0;
+	public boolean ongoing = false;
 	
 	public PlotFour(double width, double height, AssetsManager assetsManager, Controller controller) {
 		
@@ -407,7 +413,7 @@ public class PlotFour extends Group {
 	public void startGame() {
 		
 		setGame();
-		
+		ongoing = true;
 		controller.port.setOnMouseMoved(event ->{
 			selector.slide(event);
 		});
