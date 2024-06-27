@@ -38,17 +38,19 @@ public class StartMenu extends VBox {
 		plot_four_view.setFitWidth(200);
 		plot_four_view.setFitHeight(100); 	
 		
-		plot_four_title.setFont(Font.loadFont(assetsManager.getFont(), 32));
+		plot_four_title.setFont(Font.loadFont(assetsManager.getFont(), 30));
 		plot_four_title.setFill(Color.WHITE);
 		
-		startButton.setFont(Font.font("Roboto", FontWeight.EXTRA_BOLD, 16));
+		startButton.setFont(Font.font("Roboto", FontWeight.EXTRA_BOLD, 15));
 		startButton.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, null, null)));
 		startButton.setTextFill(Color.WHITE);
 		
 		startButton.setOnMouseClicked(event -> {
+			
 			controller.changeContext("Plot Four");
-			PlotFour plot_four = (PlotFour) this.controller.contexts.get("Plot Four");
+			PlotFour plot_four = (PlotFour) controller.contexts.get("Plot Four");
 			plot_four.startGame();
+			
 		});
 		
 		startButton.setOnMouseEntered(event -> {
