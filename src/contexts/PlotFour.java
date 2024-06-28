@@ -35,6 +35,8 @@ public class PlotFour extends Group {
 			newGame.setLayoutY(positions[0][3].getY() - 50);
 			
 			newGame.setOnMouseClicked(event -> {
+				reset();
+				startGame();
 				getChildren().remove(newGame);
 				getChildren().add(forfeit);
 			});
@@ -59,6 +61,12 @@ public class PlotFour extends Group {
 			getChildren().add(forfeit);
 			
 			forfeit.setOnMouseClicked(event -> {
+				
+				if(currentUnit % 2 == 0)
+					record.setWinner(2);
+				else
+					record.setWinner(1);
+				
 				getChildren().remove(forfeit);
 				getChildren().add(newGame);
 			});
@@ -194,7 +202,7 @@ public class PlotFour extends Group {
 			
 			int col = -1;
 			
-			if (currentUnit < UNITS && winner == 0 && controller.port.getRoot() == PlotFour.this)
+			if (currentUnit < UNITS && winner == 0)
 				if(event.getSceneX() >= positions[0][0].getX() && event.getSceneX() < positions[0][6].getX() + 50) {
 					
 					col = 0;
@@ -213,7 +221,7 @@ public class PlotFour extends Group {
 			
 			int col = slide(event);
 			
-			if(col > -1) {
+			if(col > -1 && controller.port.getRoot() == PlotFour.this) {
 				move(col);
 				audioPlayer.play();
 				audioPlayer.seek(audioPlayer.getStartTime());
@@ -427,6 +435,18 @@ public class PlotFour extends Group {
 		});
 	}
 	
-	private void endGame() {								
+	private void reset() {
+		
+		getChildren().remove(liveMenu);
+		getChildren().remove(record);
+		getChildren().remove(selector);
+		
+		for (int i = 0; i < 42; i++)
+			getChildren().remove(pieces[i]);
+		
+		for (int row = 0; row < ROWS; row++)
+			for ( int col = 0; col < COLS; col++)
+				getChildren().remove(positions[row][col]);
+		
 	}
 }
