@@ -149,6 +149,11 @@ public class PlotFour extends Group {
 			text.setY(positions[0][3].getY() - 25);
 			user.setCenterY((positions[0][3].getY() - 25) - text.getLayoutBounds().getHeight()/2);
 			
+			selector.currentPiece = null;
+			selector.setFill(Color.TRANSPARENT);
+			
+			currentUnit = 0;
+			
 			if(winner == 1) {
 				user.setFill(Color.RED);
 			}
@@ -202,7 +207,7 @@ public class PlotFour extends Group {
 			
 			int col = -1;
 			
-			if (currentUnit < UNITS && winner == 0)
+			if (currentUnit < UNITS && winner == 0 && currentPiece != null)
 				if(event.getSceneX() >= positions[0][0].getX() && event.getSceneX() < positions[0][6].getX() + 50) {
 					
 					col = 0;
@@ -211,7 +216,7 @@ public class PlotFour extends Group {
 						col++;
 					
 					setTranslateX(positions[0][col].getX() - getPoints().get(0));
-					this.currentPiece.setTranslateX(positions[0][col].getX() - this.currentPiece.getCenterX() + 25);
+					currentPiece.setTranslateX(positions[0][col].getX() - currentPiece.getCenterX() + 25);
 				}
 			
 			return col;
@@ -246,14 +251,13 @@ public class PlotFour extends Group {
 	
 	private Record record = null;
 	
-	private Position[][] positions = new Position[ROWS][COLS];
+	private Position[][] positions = null;
 	private final int UNITS = 42;
-	private Piece[] pieces = new Piece[UNITS];
-	private final Selector selector = new Selector();
+	private Piece[] pieces = null;
+	private Selector selector = null;
 	
 	private int currentUnit = 0;
 	private int winner = 0;
-	public boolean ongoing = false;
 	
 	public PlotFour(double width, double height, AssetsManager assetsManager, Controller controller) {
 		
@@ -267,13 +271,11 @@ public class PlotFour extends Group {
 		audioPlayer = new MediaPlayer(audio);
 		audioPlayer.setVolume(.25);
 	}
-	
-	private void setRecord() {
-		record = new Record();
-		getChildren().add(record);
-	}
+
 	
 	private void setPieces() {
+		
+		pieces = new Piece[UNITS];
 		
 		for (int piece = 0; piece < UNITS; piece++) {
 			
@@ -290,6 +292,8 @@ public class PlotFour extends Group {
 	
 	private void setPositions() {
 		
+		positions = new Position[ROWS][COLS];
+		
 		double y = height/2 - (ROWS*50)/2;
 		for (int row = 0; row < ROWS; row++) {
 			double x = width/2 - (COLS*50)/2;
@@ -305,6 +309,9 @@ public class PlotFour extends Group {
 	}
 	
 	private void setSelector() {
+		
+		selector = new Selector();
+		
 		selector.setFill(Color.WHITE);
 		
 		//Point 1
@@ -324,6 +331,11 @@ public class PlotFour extends Group {
 		getChildren().add(selector);
 		
 		selector.toBack();
+	}
+	
+	private void setRecord() {
+		record = new Record();
+		getChildren().add(record);
 	}
 	
 	private void setMenu() {
@@ -356,11 +368,8 @@ public class PlotFour extends Group {
 				selector.setCurrentPiece(pieces[currentUnit]);
 				record.setTurn(pieces[currentUnit].user);
 			}
-			else {
-				selector.currentPiece = null;
-				selector.setFill(Color.TRANSPARENT);
+			else
 				record.setWinner(winner);
-			}
 		}
 	}
 	
@@ -421,7 +430,6 @@ public class PlotFour extends Group {
 	public void startGame() {
 		
 		setGame();
-		ongoing = true;
 		controller.port.setOnMouseMoved(event ->{
 			selector.slide(event);
 		});
