@@ -9,7 +9,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -66,10 +65,8 @@ public class PlotFour extends Group {
 					record.setWinner(2);
 				else
 					record.setWinner(1);
-				
-				getChildren().remove(forfeit);
-				getChildren().add(newGame);
 			});
+			
 			
 			forfeit.setOnMouseEntered(event -> {
 				forfeit.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
@@ -152,8 +149,6 @@ public class PlotFour extends Group {
 			selector.currentPiece = null;
 			selector.setFill(Color.TRANSPARENT);
 			
-			currentUnit = 0;
-			
 			if(winner == 1) {
 				user.setFill(Color.RED);
 			}
@@ -165,6 +160,8 @@ public class PlotFour extends Group {
 				user.setCenterX(width/2 - (user.getRadius()*2 + 25 + text.getLayoutBounds().getWidth())/2 + 25);
 			}
 			
+			liveMenu.getChildren().remove(liveMenu.forfeit);
+			liveMenu.getChildren().add(liveMenu.newGame);
 		}
 		
 	}
@@ -228,8 +225,6 @@ public class PlotFour extends Group {
 			
 			if(col > -1 && controller.port.getRoot() == PlotFour.this) {
 				move(col);
-				audioPlayer.play();
-				audioPlayer.seek(audioPlayer.getStartTime());
 			}
 			
 		}
@@ -344,12 +339,12 @@ public class PlotFour extends Group {
 	}
 	
 	private void move(int col) {
-		if(selector.currentPiece.user == 1)
-			selector.currentPiece.setFill(Color.RED);
-		else 
-			selector.currentPiece.setFill(Color.YELLOW);
-		
 		if (col >= 0 && col < COLS && positions[0][col].user == 0) {
+			
+			if(selector.currentPiece.user == 1)
+				selector.currentPiece.setFill(Color.RED);
+			else 
+				selector.currentPiece.setFill(Color.YELLOW);
 			
 			int row = 0;
 			while(row < ROWS && positions[row][col].user == 0)
@@ -370,6 +365,9 @@ public class PlotFour extends Group {
 			}
 			else
 				record.setWinner(winner);
+			
+			audioPlayer.play();
+			audioPlayer.seek(audioPlayer.getStartTime());
 		}
 	}
 	
@@ -444,6 +442,9 @@ public class PlotFour extends Group {
 	}
 	
 	private void reset() {
+		
+		winner = 0;
+		currentUnit = 0;
 		
 		getChildren().remove(liveMenu);
 		getChildren().remove(record);
